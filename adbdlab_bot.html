@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewarded Ad Mini App</title>
+    <script src='//niphaumeenses.net/vignette.min.js' data-zone='8455590' data-sdk='show_8455590'></script>
+    <style>
+        /* Basic Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #282c34;
+            color: #ffffff;
+        }
+        .app-container {
+            text-align: center;
+            background: #3b3f47;
+            padding: 30px;
+            border-radius: 15px;
+            width: 320px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+        }
+        .username {
+            font-size: 22px;
+            margin: 5px 0;
+            color: #00ff99;
+        }
+        .balance-info, .reward-counter {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #ffeb3b;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.4);
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .profile-section {
+            margin-top: 30px;
+            color: #00ff99;
+            text-align: left;
+        }
+        .profile-section p {
+            margin: 5px 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Logo and Username -->
+        <img src="https://via.placeholder.com/60" alt="Logo" class="logo">
+        <h2 class="username">Hello, User123</h2>
+        
+        <!-- Balance and Reward Counter -->
+        <p class="balance-info">Balance: $<span id="balance">0.00</span></p>
+        <p class="reward-counter">Rewards Earned: <span id="reward-count">0</span></p>
+        
+        <!-- Ad Button -->
+        <button onclick="showRewardedAd()">Watch Ad for Reward</button>
+        
+        <!-- Additional Buttons for Withdraw and Task -->
+        <div class="button-container">
+            <button onclick="withdrawBalance()">Withdraw</button>
+            <button onclick="viewTasks()">Tasks</button>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <h3>Profile</h3>
+            <p><strong>Name:</strong> User123</p>
+            <p><strong>Email:</strong> user123@example.com</p>
+            <p><strong>Member Since:</strong> Jan 2024</p>
+        </div>
+    </div>
+
+    <script>
+        let rewardCount = 0;
+        let balance = 0.00;
+
+        function showRewardedAd() {
+            if (typeof show_8455590 === 'function') {
+                show_8455590().then(() => {
+                    rewardCount += 1;
+                    balance += 0.10; // Example reward amount
+                    document.getElementById('reward-count').textContent = rewardCount;
+                    document.getElementById('balance').textContent = balance.toFixed(2);
+                    alert('You have earned a reward of $0.10!');
+                }).catch(error => {
+                    console.error('Ad failed to load or display:', error);
+                });
+            } else {
+                console.error('Ad script is not loaded or available.');
+            }
+        }
+
+        function withdrawBalance() {
+            if (balance >= 5.00) {
+                alert(`Withdraw successful! You withdrew $${balance.toFixed(2)}`);
+                balance = 0;
+                document.getElementById('balance').textContent = balance.toFixed(2);
+            } else {
+                alert('Minimum balance for withdrawal is $5.00');
+            }
+        }
+
+        function viewTasks() {
+            alert('New tasks coming soon! Stay tuned.');
+        }
+    </script>
+</body>
+</html>
